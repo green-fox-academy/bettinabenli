@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Thymeleaf Exercise #</title>
+    <link rel="stylesheet" th:href="@{/style.css}"/>
+    <meta charset="utf-8"/>
+</head>
+<body>
+<ul>
+    <li>
+        <a th:href="@{/index/} + ${fox.name}">Information</a>
+    </li>
+    <li>
+        <a th:href="@{/nutritionStore/} + ${fox.name}">Nutrition Store</a>
+    </li>
+    <li>
+        <a th:href="@{/trickCenter/} + ${fox.name}">Trick Center</a>
+    </li>
+</ul>
+<p th:if="${tricks.isEmpty()}" th:style="'color: green'" th:text="'All the tricks have been learned :) '"></p>
+
+<div th:unless="${tricks.isEmpty()}">
+    <form action="#" th:action="@{/trickCenter/} + ${fox.name}" method="post">
+        Tricks :
+        <select th:object="${fox}" name="trick">
+            <option th:each="trick : ${tricks}" th:value="${trick.name()}" th:text="${trick}"></option>
+        </select>
+        <button type="submit" name="Learn">Submit</button>
+    </form>
+</div>
+
+</body>
+</html>
